@@ -5,8 +5,9 @@ import { Card } from 'react-native-paper'
 export default function Cards() {
   return (
     <Card elevation={5} style={styles.card}>
+        <Text style={styles.title}>Atlanta</Text>
         <Card.Cover style={styles.imageStore} key={'name'} source={require('../images/pruebaCiudad.jpg')}/>
-        <Button  title='hola'style={styles.button}/>
+        <Button  title='Read more'style={styles.button}/>
     </Card>
   )
 }
@@ -14,9 +15,18 @@ export default function Cards() {
 const styles = StyleSheet.create({
     card:{
         backgroundColor:'white',
+        marginBottom: 10,
     },
     imageStore:{
         padding:18,
         backgroundColor:'white',
     },
+    title:{
+        textAlign:'center',
+        fontWeight: "bold",
+        paddingTop: 10,
+    },
+    button:{
+        
+    }
 })

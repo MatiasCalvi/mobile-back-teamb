@@ -95,7 +95,9 @@ const styles = StyleSheet.create({
   },
   containerCards:{
     backgroundColor:'#fff', 
-    height: height/2
+    height: height/2,
+    paddingBottom:10,
+    paddingTop:20,
   },
   containerCheck:{
     flexDirection:'row',
