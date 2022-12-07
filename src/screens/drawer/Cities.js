@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import SearchBar from "../../components/SearchBar";
@@ -23,31 +24,36 @@ export default function Cities() {
   let [value,setValue]=useState() 
   const [checked, setChecked] = useState(false); 
   return (<>
-    <View style={styles.header}>
-      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-        <Text style={styles.text}>Cities</Text>
-        <Text style={styles.text.text2}>Adventure Awaits, Go Find It.</Text>
-      </ImageBackground>
-    </View>
-      <View>
-        <SearchBar
-          value={value}
-          updateSearch={updateSearch}
-          style={{}}
-        />
+  <ScrollView>
+      <View style={styles.header}>
+        <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+          <Text style={styles.text}>Cities</Text>
+          <Text style={styles.text.text2}>Adventure Awaits, Go Find It.</Text>
+        </ImageBackground>
       </View>
-    <View style={styles.checkboxContainer}>
-        <Text style={styles.titleCheckbox}>Select the desired continent :</Text>
-        <Checkbox
-          status={checked ? 'checked' : 'unchecked'}
-          onPress={() => {
-            setChecked(!checked);
-          }}
-        />
-    </View>
-    <View style={styles.containerCards}>
-        <Cards/>
-    </View>
+        <View>
+          <SearchBar
+            value={value}
+            updateSearch={updateSearch}
+            style={{}}
+          />
+        </View>
+      <View style={styles.checkboxContainer}>
+          <Text style={styles.titleCheckbox}>Select the desired continent :</Text>
+          <View style={styles.containerCheck}>
+              <Checkbox
+              status={checked ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+            />
+            <Text>Continent</Text>
+          </View>
+      </View>
+      <View style={styles.containerCards}>
+          <Cards/>
+      </View>
+  </ScrollView>
   </>);
 }
 
@@ -88,6 +94,14 @@ const styles = StyleSheet.create({
     paddingTop:10,
   },
   containerCards:{
-    
+    backgroundColor:'#fff', 
+    height: height/2
+  },
+  containerCheck:{
+    flexDirection:'row',
+    alignItems:'center',
+    /* justifyContent:'center' */
+    paddingLeft:15,
+    marginTop:10
   }
 });
