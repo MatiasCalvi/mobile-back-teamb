@@ -56,14 +56,15 @@ import {
       alignItems: 'center',
     },
     image: {
-      flex: 0.6,
+      flex: 0.3,
       width: '100%',
     },
     content: {
-      flex: 0.4,
+      flex: 0.2,
       alignItems: 'center',
     },
     title: {
+      marginTop: 12,
       fontSize: 24,
       fontWeight: 'bold',
       color: '#333',

@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TextInput, Button } from "react-native";
 import React from 'react'
 
-export default function SignIn() {
+export default function SignUp() {
     const handleSubmit = () => {
         console.log ('Logeado')
     }

@@ -1,14 +1,14 @@
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Tab2 from './src/Navigation/Tab2'
+import Tabs from './src/Navigation/Tab'
 
 
 
 export default function App() {
   return (
     <NavigationContainer>
-    <Tab2 />
+    <Tabs />
     </NavigationContainer>
   );
 }

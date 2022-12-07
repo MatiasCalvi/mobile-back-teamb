@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Button, Image } from "react-native";
+import { View,ScrollView, Text, StyleSheet, TextInput, Button, Image, ImageBackground } from "react-native";
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Slider from '../components/carrousel/Slider'
@@ -7,39 +7,67 @@ import Slider from '../components/carrousel/Slider'
 export default function Home() {
     
     const Tab = createBottomTabNavigator();
+    const onPressLearnMore = console.log('todo ok')
+    const image = {
+        uri: "https://images.pexels.com/photos/3225529/pexels-photo-3225529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      };
 
     return ( 
 
-<View className="total">
-
-            <View className="bg-img total">
-                <View className="total flex j-center a-center flex-column ">
-                    <View className="flex flex-column a-center">
-                        <Image src="./img/sun.png"  />
-                        <Text className=" f-s-big t-a-center shadow">
+        <View style={{ flex:1 , backgroundColor: 'lightgrey'}}>
+            <View style={{ flex:1, backgroundColor: 'lightgrey' }}>
+                <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+                        <Text style={styles.text.text2} >
                         Adventure Awaits, Go Find It.
                         </Text>
-                    </View>
-                    <View className="w-100 flex g-25 a-center flex-column ">
-                    <Button className="butt-class" title='Find your next destiny.'/>
-                    <Button className="butt-class" title='Find the best hotels.' />
+                <View >
+                    <View style={styles.fixToText}>
+                    <Button title='Find your next destiny' onPress={onPressLearnMore} />
+                    <Button  title='Find the best hotels' onPress={onPressLearnMore}/>
                     </View>
                 </View>
+                </ImageBackground>
             </View>
-            <View className='home2'>
-            <Slider/>
+            <View style={{ flex:2, backgroundColor: 'lightgrey', marginTop:10, }}>
+                <Slider/>
             </View>
-
-
-</View>
-        
-        
-        
-    
+        </View>
     )
-    
+
 }
 
-const style = StyleSheet.create({
-
-})
+const styles = StyleSheet.create({
+    image: {
+        flex: 1,
+        justifyContent: "center"
+      },
+    Text: {
+        justifyContent: "center",
+        alignItems: 'center',
+        
+      },
+      fixToText: {
+        marginTop: 22,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+      },
+    text: {
+        text2: {
+            marginTop: -44,
+          fontSize: 14,
+          color: "white",
+          lineHeight: 60,
+          fontWeight: "bold",
+          textAlign: "center",
+          backgroundColor: "#000000c0",
+          textTransform: "uppercase",
+        },
+        color: "white",
+        fontSize: 22,
+        lineHeight: 60,
+        fontWeight: "bold",
+        textAlign: "center",
+        backgroundColor: "#000000c0",
+        textTransform: "uppercase",
+      },
+  });
