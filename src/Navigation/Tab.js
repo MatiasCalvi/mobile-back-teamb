@@ -5,6 +5,7 @@ import MyProfile from '../Screens/MyProfile';
 import SignIn from '../Screens/SignIn';
 import SignUp from '../Screens/SignUp';
 
+
 const Tab = createMaterialBottomTabNavigator();
 
 export default function Tabs() {
@@ -54,6 +55,7 @@ export default function Tabs() {
           ),
         }}
       />
+
     </Tab.Navigator>
   );
 }
