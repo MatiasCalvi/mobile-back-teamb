@@ -1,7 +1,7 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Home from '../Screens/Home';
-import MyProfile from '../Screens/MyProfile';
+import EditProfile from '../Screens/EditProfile';
 import SignIn from '../Screens/SignIn';
 import SignUp from '../Screens/SignUp';
 
@@ -46,10 +46,10 @@ export default function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={MyProfile}
+        name="EditProfile"
+        component={EditProfile}
         options={{
-          tabBarLabel: 'MyProfile',
+          tabBarLabel: 'Edit Profile',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="card-account-details" color={color} size={26} />
           ),
