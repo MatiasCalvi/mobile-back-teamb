@@ -5,6 +5,7 @@ import EditProfile from '../Screens/EditProfile';
 import SignIn from '../Screens/SignIn';
 import SignUp from '../Screens/SignUp';
 import Hotels from '../Screens/Hotels';
+import HotelD from '../Screens/HotelD';
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -37,10 +38,10 @@ export default function Tabs() {
         }}
       />       
       <Tab.Screen
-        name="Hotels"
-        component={Hotels}
+        name="HotelD"
+        component={HotelD}
         options={{
-          tabBarLabel: 'Hotels',
+          tabBarLabel: 'HotelD',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account-child-outline" color={color} size={26} />
           ),
