@@ -17,7 +17,7 @@ const toDoReducer = createReducer(initialState,
         builder
         .addCase(getCities.fulfilled,(state,action)=>{
             let categories=Array.from(new Set(action.payload.cities.map(city=>city.continent)))
-            console.log(action.payload)
+            
                 return {
                     ...state,
                     categories,
@@ -29,6 +29,7 @@ const toDoReducer = createReducer(initialState,
             
                 return {
                     ...state,
+                    value1:action.payload.value1,
                     cities: action.payload.cities
                 }
         })
@@ -38,11 +39,9 @@ const toDoReducer = createReducer(initialState,
             }
         })
         .addCase(getCitiesUser.fulfilled,(state,action)=>{
-            console.log(action.payload)     
+               
             return {
                     ...state,
-                    ... action.payload.value,
-                    ... action.payload.value2,
                     citiesAdmin: action.payload.cities
                 }
         })
@@ -53,7 +52,7 @@ const toDoReducer = createReducer(initialState,
             }
         })
         .addCase(getAndEdit.fulfilled,(state,action)=>{
-            console.log(action.payload.success)
+           
             if (action.payload.success) {
                 return {
                         ...state,

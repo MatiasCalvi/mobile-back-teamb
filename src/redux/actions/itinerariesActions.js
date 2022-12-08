@@ -2,7 +2,22 @@ import {createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "../../api/url";
 
-
+    const getItinerariesAll = createAsyncThunk("getItinerariesAll", async () => {
+      
+      try {
+        const res = await axios.get(
+          `${BASE_URL}/itineraries`
+        );
+    
+        console.log(res.data.itinerary);
+        return { itinerary: res.data.itinerary };
+      } catch (error) {
+        console.log(error);
+        return {
+          payload: "Error",
+        };
+      }
+    });
 
   const getItinerariesUser = createAsyncThunk("getCitiesUser", async (userId) => {
   
@@ -21,11 +36,12 @@ import { BASE_URL } from "../../api/url";
     }
   });
 
-  const getAndDestroy = createAsyncThunk("getAndDestroy", async ({ItineryId})=> {
+  const getAndDestroy = createAsyncThunk("getAndDestroy", async ({ItineryId,token})=> {
+    
+    let headers = {headers: {'Authorization': `Bearer ${token}`}}
+
     try {
-      const res = await axios.delete(
-        `${BASE_URL}/itineraries/${ItineryId}`
-      )
+      const res = await axios.delete(`${BASE_URL}/itineraries/${ItineryId}`,headers)
       if (res.data.success){
         return {
           success: true,
@@ -48,14 +64,16 @@ import { BASE_URL } from "../../api/url";
   const getAndEdit = createAsyncThunk("getAndEdit", async ({data, go})=> {
 
     let url = `${BASE_URL}/itineraries/${go}`
-    
+
+    let headers = {headers: {'Authorization': `Bearer ${data.token}`}}
+
     try {
-      let res = await axios.put(url,data)
-      console.log(res.data) 
+      let res = await axios.put(url,data.itinerary,headers)
+      console.log(res)
       if (res.data.success){
         return {
           success: true,
-          response: data,
+          response: data.itinerary,
           responseid: res.data.success
         }
       } else {
@@ -71,13 +89,14 @@ import { BASE_URL } from "../../api/url";
       }
     }
   })
-  const itineraryCreation = createAsyncThunk("itineraryCreation", async (data) => {
+  const itineraryCreation = createAsyncThunk("itineraryCreation", async ({data,token}) => {
     
+    let headers = {headers: {'Authorization': `Bearer ${token}`}}
     const url=`${BASE_URL}/itineraries`
   
       try {
       
-        let res = await axios.post(url,data)
+        let res = await axios.post(url,data,headers)
         console.log(res)
         if(res.data.success){
             
@@ -102,7 +121,8 @@ const itinerariesActions = {
   getItinerariesUser,
   getAndDestroy,
   getAndEdit,
-  itineraryCreation
+  itineraryCreation,
+  getItinerariesAll
 };
 
 export default itinerariesActions;

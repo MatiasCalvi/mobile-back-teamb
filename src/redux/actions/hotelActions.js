@@ -1,10 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASE_URL } from "../../api/url";
 
 
 const getHotels = createAsyncThunk("getHotels", async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/hotels`);
+      const res = await axios.get(`${BASE_URL}/hotels`);
       console.log(res)
       return res.data.allhotels;
     } catch (error) {
@@ -15,7 +16,7 @@ const getHotels = createAsyncThunk("getHotels", async () => {
     }
   });
   const getHotelsFilter = createAsyncThunk("getHotelsFilter",async ({hotels, searched, order }) => {
-      let url = `http://localhost:8000/api/${hotels}?order=${order}&name=${searched}`;
+      let url = `${BASE_URL}${hotels}?order=${order}&name=${searched}`;
       try {
         const res = await axios.get(url);
         console.log(res)
@@ -34,7 +35,7 @@ const getHotels = createAsyncThunk("getHotels", async () => {
   );
 
   const newHotel = createAsyncThunk("newCity", async (data) => {
-    let url=`http://localhost:8000/api/hotels`  
+    let url=`${BASE_URL}/hotels`  
     try {
   
         let res = await axios.post(url,data);
@@ -55,13 +56,13 @@ const getHotels = createAsyncThunk("getHotels", async () => {
       }
   }); 
   const getHotelUser = createAsyncThunk("getHotelUser", async (userId) => {
-  
+ 
     try {
       const res = await axios.get(
-        `http://localhost:8000/api/myhotels?userId=${userId}`
+        `${BASE_URL}/hotels?userId=${userId}`
       );
 
-      console.log(res.data.allhotels);
+      console.log(res);
       return { hotels: res.data.allhotels };
     } catch (error) {
       console.log(error);
@@ -71,26 +72,36 @@ const getHotels = createAsyncThunk("getHotels", async () => {
     }
   });
 
-  const getAndDestroy = createAsyncThunk("getAndDestroy", async ({hotelId})=> {
+  const getAndDestroy = createAsyncThunk("getAndDestroy", async ({id})=> {
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/hotels${hotelId}`
+        `${BASE_URL}/hotels/${id}`
       )
-      return { hotels: res.data.hotel }
-    } catch (error) {
+      if (res.data.success){
+        return {
+          success: true,
+          response: res.data.success
+        }
+      } else {
+        return {
+          success: false,
+          response: res.data.message
+        }
+      }
+    }catch (error) {
       console.log(error)
       return {
         payload: "Error"
       }
     }
-  })
+  });
 
   const getAndEdit = createAsyncThunk("getAndEdit", async ({data, go})=> {
 
-    let url = `http://localhost:8000/api/hotels${go}`
+    let url = `${BASE_URL}/hotels/${go}`
     
     try {
-      let res = await axios.put(url,data)
+      let res = await axios.patch(url,data)
       console.log(res.data)
       
       if (res.data.success){

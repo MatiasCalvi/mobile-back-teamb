@@ -5,26 +5,60 @@ import {
   Dimensions,
   ImageBackground,
   ScrollView,
+  Checkbox
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import SearchBar from "../../components/SearchBar";
 import Cards from "../../components/Cards"
-import { Checkbox } from "react-native-paper";
+/* import { Checkbox } from "react-native-paper"; */
+import { useDispatch,useSelector } from 'react-redux';
+import toDoActions from '../../redux/actions/toDoActions.js';
 
 const { height, width } = Dimensions.get("window");
 const image = {
   uri: "https://images.pexels.com/photos/9329805/pexels-photo-9329805.jpeg?cs=srgb&dl=pexels-bakr-magrabi-9329805.jpg&fm=jpg",
 };
 
-function updateSearch(value){
+export default function Cities({navigation}) {
 
+  let [search,setSearched]=useState()
+  let [aproved,setAproved]=useState(true)
+  
+  
+  const dispatch= useDispatch()
+  let {getCitiesFilter,getCities}=toDoActions
+
+
+  const {cities} = useSelector((state) => state.cities);
+
+let listen=(value)=> {
+  setSearched(value)
 }
 
-export default function Cities() {
-  let [value,setValue]=useState() 
-  const [checked, setChecked] = useState(false); 
+async function get(){
+  /* console.log(search)
+  await dispatch(getCitiesFilter(search)) */
+  try {
+    if( typeof getCities== 'function' && aproved){
+
+      await dispatch(getCities())
+      setAproved(false)
+  
+    }
+    else{
+      await dispatch(getCitiesFilter(search))
+    }
+  }  catch (error) {
+    console.log(error)
+  }
+}
+
+useEffect(()=>{
+  get()
+},[search])
+
   return (<>
-  <ScrollView>
+  <ScrollView style={styles.body}>
       <View style={styles.header}>
         <ImageBackground source={image} resizeMode="cover" style={styles.image}>
           <Text style={styles.text}>Cities</Text>
@@ -33,33 +67,25 @@ export default function Cities() {
       </View>
         <View>
           <SearchBar
-            value={value}
-            updateSearch={updateSearch}
-            style={{}}
+            /* updateSearch={updateSearch} */
+            onChangeText={listen}
           />
         </View>
-      <View style={styles.checkboxContainer}>
-          <Text style={styles.titleCheckbox}>Select the desired continent :</Text>
-          <View style={styles.containerCheck}>
-              <Checkbox
-              status={checked ? 'checked' : 'unchecked'}
-              onPress={() => {
-                setChecked(!checked);
-              }}
-            />
-            <Text>Continent</Text>
-          </View>
-      </View>
       <View style={styles.containerCards}>
-          <Cards/>
+        {cities!==undefined 
+            ? cities.map(e=><Cards key={e._id} id={e._id} navigation={navigation} name={e.name} photo={e.photo}/>)
+            : <Text style={styles.titleResults}>No hay resultados</Text>}
       </View>
   </ScrollView>
   </>);
 }
 
 const styles = StyleSheet.create({
+  body:{
+    backgroundColor:"#fff"
+  },
   header: {
-    height: height / 2,
+    height: height / 2.8,
   },
   image: {
     flex: 1,
@@ -95,7 +121,6 @@ const styles = StyleSheet.create({
   },
   containerCards:{
     backgroundColor:'#fff', 
-    height: height/2,
     paddingBottom:10,
     paddingTop:20,
   },
@@ -105,5 +130,9 @@ const styles = StyleSheet.create({
     /* justifyContent:'center' */
     paddingLeft:15,
     marginTop:10
+  },
+  titleResults:{
+    textAlign:'center',
+    fontWeight: "bold",
   }
 });

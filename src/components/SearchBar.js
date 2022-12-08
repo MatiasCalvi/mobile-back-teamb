@@ -2,15 +2,21 @@ import { View, Text,StyleSheet,TextInput,Image } from 'react-native'
 import React, { useState } from 'react'
 import { color } from 'react-native-reanimated'
 
-export default function SearchBar({style}) {
+export default function SearchBar({style,onChangeText}) {
     let [query,setQuery]=useState()
+    let [text,setText]=useState('')
+
+    let listen=(e)=>{
+        onChangeText(e)
+    }
+
   return (
     <View style={styles.container}>
         <View style={styles.searchBarContainer}>
             <View style={styles.vwSearch}>
                 <Image resizeMode='center' style={styles.icSearch} source={require('../images/ic_search.png')}/>
             </View>
-            <TextInput style={styles.searchBarInput}/>
+            <TextInput style={styles.searchBarInput} onChangeText={listen} />
         </View>
     </View>
   )

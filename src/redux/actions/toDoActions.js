@@ -8,8 +8,26 @@ const getCities = createAsyncThunk("getCities", async () => {
         `${BASE_URL}/cities`
       );
   
-      console.log(res.data.allcities);
+      
       return { cities: res.data.allcities };
+    } catch (error) {
+      
+      return {
+        payload: "Error",
+      };
+    }
+  });
+  const getCitiesFilter = createAsyncThunk("getCitiesFilter", async (search) => {
+    try {
+      const res = await axios.get(
+        `${BASE_URL}/cities?name=${search}`
+      );
+  
+      console.log(res.data.allcities);
+      return {
+        value1: search,
+        cities: res.data.allcities 
+      };
     } catch (error) {
       console.log(error);
       return {
@@ -17,27 +35,6 @@ const getCities = createAsyncThunk("getCities", async () => {
       };
     }
   });
-const getCitiesFilter = createAsyncThunk("getCitiesFilter", async ({ search ,check }) => {
-  /* let url=`${BASE_URL}/${value}` */
-  try {
-    console.log(check);
-    const res = await axios.get(
-      `${BASE_URL}/cities?name=${search}${check.join('')}`
-    );
-
-    console.log(res.data.allcities);
-    return {
-      value2:check,
-      value1: search,
-      cities: res.data.allcities 
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      payload: "Error",
-    };
-  }
-});
 
 const newCity = createAsyncThunk("newCity", async (data) => {
   let url=`${BASE_URL}/cities`  

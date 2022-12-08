@@ -1,29 +1,31 @@
 import { createReducer } from "@reduxjs/toolkit";
 import userActions from "../actions/userActions";
 
-const { enter, enterAgain, exit } = userActions;
+const { enter, enterAgain, exit, getOneUser,  editUser } = userActions;
 const initialState = {
   name: "",
   photo: "",
   logged: false,
   token: "",
   role: "",
-  id: "",
+  id:"",
+  profile: []
 };
 
 const userReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(enter.fulfilled, (state, action) => {
-      //console.log(action.payload.response)
+     
       const { success, response } = action.payload;
       console.log(action.payload);
+
       if (success) {
-        let { user, token } = response; //este token es el codigo que viene del backend
+        let { user, token } = response; 
         localStorage.setItem(
           "token",
           JSON.stringify({ token: { user: token } })
-        ); //este objeto token va a guardar
-        //la propiedad con el nombre del tipo de token y el token que guarda
+        ); 
+
         let newState = {
           ...state,
           name: user.name,
@@ -43,7 +45,7 @@ const userReducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(enterAgain.fulfilled, (state, action) => {
-      //console.log(action.payload.response)
+     
       const { success, response } = action.payload;
       console.log(action.payload);
       if (success) {
@@ -66,7 +68,21 @@ const userReducer = createReducer(initialState, (builder) => {
         };
         return newState;
       }
+
     })
+    .addCase(getOneUser.fulfilled,(state,action)=>{
+      console.log(action.payload);
+      return{
+          ...state,
+      profile: action.payload.user
+      }
+  
+      }).addCase(editUser.fulfilled,(state,action)=>{
+          return{
+              ...state,
+              id:action.payload.id
+          }
+      })
     .addCase(exit.fulfilled, (state, action) => {
       const { success, response } = action.payload;
       if (success) {
@@ -89,5 +105,6 @@ const userReducer = createReducer(initialState, (builder) => {
       }
     });
 });
+
 
 export default userReducer;
