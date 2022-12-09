@@ -3,6 +3,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Home from '../Screens/Main';
 import EditProfile from '../Screens/EditProfile';
 import SignIn from '../Screens/SignIn';
+import Hotels from '../Screens/Hotel';
+import HotelD from '../Screens/HotelD';
+
 
 
 
@@ -41,6 +44,26 @@ export default function Tabs() {
         component={EditProfile}
         options={{
           tabBarLabel: 'Edit Profile',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="card-account-details" color={color} size={26} />
+          ),
+        }}
+      />
+            <Tab.Screen
+        name="Hotels"
+        component={Hotels}
+        options={{
+          tabBarLabel: 'Hotels',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="card-account-details" color={color} size={26} />
+          ),
+        }}
+      />
+            <Tab.Screen
+        name="HotelD"
+        component={HotelD}
+        options={{
+          tabBarLabel: 'Hotel Description',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="card-account-details" color={color} size={26} />
           ),

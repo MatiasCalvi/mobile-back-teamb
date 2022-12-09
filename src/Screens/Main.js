@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Slider from '../components/carrousel/Slider'
 
 
-export default function Home(navigation) {
+export default function Home({navigation}) {
 
 
 
@@ -13,6 +13,13 @@ export default function Home(navigation) {
     const image = {
         uri: "https://images.pexels.com/photos/3225529/pexels-photo-3225529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       };
+    
+      let RSign =() => {
+        navigation.navigate("SignIn")
+    }
+      let Redit =() => {
+        navigation.navigate("EditProfile")
+    }
 
     return ( 
 
@@ -24,8 +31,8 @@ export default function Home(navigation) {
                         </Text>
                 <View >
                     <View style={styles.fixToText}>
-                    <Button title='Find your next destiny' onPress={() => navigation.navigate('Hotels')}  />
-                    <Button  title='Find the best hotels' onPress={() => navigation.navigate('SignUp')} />
+                    <Button title='Find your next destiny' onPress={(RSign)}  />
+                    <Button  title='Find the best hotels' onPress={(Redit)} />
                     </View>
                 </View>
                 </ImageBackground>

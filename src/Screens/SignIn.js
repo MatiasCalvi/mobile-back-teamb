@@ -19,9 +19,10 @@ export default function SignIn({navigation}) {
    const handleOnChangeText = (value, fieldName) => {
      setUserInfo({ ...userInfo, [fieldName]: value.trim() });
    };
+
    function redirect(){
        navigation.navigate("EditProfile")
-  }
+    }
   async function singIn(event) {
     event.preventDefault()
     

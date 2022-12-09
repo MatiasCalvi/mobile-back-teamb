@@ -40,8 +40,7 @@ import {
   
         <View style={styles.content}>
           <Text style={styles.title}>{item.title}</Text>
-          <Text style={styles.description}>{item.description}</Text>
-          <Text style={styles.price}>{item.price}</Text>
+          <Text style={styles.price}>Capacity:{item.Capacity}</Text>
         </View>
       </View>
     );
