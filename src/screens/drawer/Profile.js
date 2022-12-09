@@ -7,7 +7,7 @@ import userActions from "../../redux/actions/userActions";
 
 export default function Profile({navigation}) {
 
-    let { logged, role ,id,token,profile,photo } = useSelector(store => store.usuario)
+    let { logged, role ,id,token,profile,photo,name } = useSelector(store => store.usuario)
     let {exit,getOneUser}=userActions
     let dispatch = useDispatch()
 
@@ -52,7 +52,7 @@ export default function Profile({navigation}) {
           <Image style={styles.avatar} source={{ uri : photo }}/>
           <View style={styles.body}>
             <View style={styles.bodyContent}>
-              <Text style={styles.name}>{profile[0]?.name}</Text>
+              <Text style={styles.name}>{name}</Text>
               <Text style={styles.info}>UX Designer / Mobile developer</Text>
               <Button onPress={logOut} title='Log out' style={{ margin: 20, backgroundColor: 'firebrick'}} />
               <Pressable style={styles.buttonCustom} onPress={redirect2}>
