@@ -1,9 +1,9 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Home from '../Screens/Home';
+import Home from '../Screens/Main';
 import EditProfile from '../Screens/EditProfile';
 import SignIn from '../Screens/SignIn';
-import SignUp from '../Screens/SignUp';
+
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -35,16 +35,7 @@ export default function Tabs() {
           ),
         }}
       />       
-      <Tab.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{
-          tabBarLabel: 'SignUp',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account-child-outline" color={color} size={26} />
-          ),
-        }}
-      />
+
       <Tab.Screen
         name="EditProfile"
         component={EditProfile}

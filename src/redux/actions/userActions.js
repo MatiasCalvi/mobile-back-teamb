@@ -6,8 +6,8 @@ import { BASE_URL } from "../../api/url";
         let url = `${BASE_URL}/auth/signin`
         try {
             let user = await axios.post(url,datos)
-           
-         console.log(user)
+
+            console.log("2" ,user)
          if(user.data.response.user.id){
     
              return {

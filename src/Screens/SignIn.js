@@ -1,10 +1,48 @@
 import { View, Text, StyleSheet, TextInput, Pressable , ImageBackground } from "react-native";
 import React from 'react'
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useDispatch } from 'react-redux';
+import userActions from '../redux/actions/userActions'
+import Home from "./Main";
 
-export default function SignIn() {
-    const handleSubmit = () => {
-        console.log ('Logeado')
-    }
+export default function SignIn({navigation}) {
+  let {enter}=userActions
+  const dispatch = useDispatch()
+   const [userInfo, setUserInfo] = useState({
+     email:'',
+     password:'',
+ 
+ 
+   });
+   const { email, password } = userInfo;
+   const handleOnChangeText = (value, fieldName) => {
+     setUserInfo({ ...userInfo, [fieldName]: value.trim() });
+   };
+   function redirect(){
+       navigation.navigate("EditProfile")
+  }
+  async function singIn(event) {
+    event.preventDefault()
+    
+   
+     try {
+         let res = await dispatch(enter(userInfo))
+     
+         if (res.payload.success) {
+             console.log(res);
+            
+      redirect()
+         }
+         else {
+          console.log(wea)
+         }
+     } catch(error) {
+         console.log(error.message)
+     }
+ }
+ 
+    
     const image = {
         uri: "https://images.pexels.com/photos/3225529/pexels-photo-3225529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       };
@@ -19,17 +57,17 @@ export default function SignIn() {
 
                             <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center',    }}>
                                 <Text style={ styles.head.text2}> Sign in</Text>
-                                <TextInput style={ styles.search} placeholder='Email'/>
-                                <TextInput style={ styles.search} placeholder='Password'/>
+                                <TextInput style={ styles.search} onChangeText={value => handleOnChangeText(value,'email')} placeholder='Email'/>
+                                <TextInput style={ styles.search} onChangeText={value => handleOnChangeText(value,'password')} placeholder='Password'/>
                             </View>
 
                             <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', }}>
-                            <Pressable style={styles.buttono} onPress={handleSubmit}>
+                            <Pressable style={styles.buttono} onPress={singIn}>
                                 <Text style={ styles.texto}>Enter</Text>
                             </Pressable>
                             <Text style={ styles.text}>or if you have an account</Text>
-                            <Pressable style={styles.buttono} onPress={handleSubmit}>
-                                <Text style={ styles.texto}>Sign Up</Text>
+                            <Pressable style={styles.buttono} >
+                                <Text style={ styles.texto} onPress={() => navigation.navigate('SignUp')} >Sign Up</Text>
                             </Pressable>
                             </View>
                     

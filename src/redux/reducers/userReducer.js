@@ -14,18 +14,22 @@ const initialState = {
 
 const userReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(enter.fulfilled, (state, action) => {
-     
-      const { success, response } = action.payload;
-      console.log(action.payload);
-
+  .addCase(enter.fulfilled, (state, action) => {
+    
+    const { success, response } = action.payload;
+    console.log( action.payload)
       if (success) {
         let { user, token } = response; 
-        localStorage.setItem(
-          "token",
-          JSON.stringify({ token: { user: token } })
-        ); 
-
+        const storeData = async ( user, token) => {
+          try {
+            const jsonValue = JSON.stringify(user, token)
+            await AsyncStorage.setItem('token', jsonValue)
+        
+          } catch (e) {
+            // saving error
+          }
+        }
+        	  console.log('90' , user)
         let newState = {
           ...state,
           name: user.name,
@@ -33,6 +37,8 @@ const userReducer = createReducer(initialState, (builder) => {
           logged: true,
           token: token,
           role: user.role,
+          id: user.id
+          
         };
         return newState;
       } else {
@@ -47,7 +53,6 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(enterAgain.fulfilled, (state, action) => {
      
       const { success, response } = action.payload;
-      console.log(action.payload);
       if (success) {
         let { user, token } = response;
 
@@ -71,7 +76,7 @@ const userReducer = createReducer(initialState, (builder) => {
 
     })
     .addCase(getOneUser.fulfilled,(state,action)=>{
-      console.log(action.payload);
+
       return{
           ...state,
       profile: action.payload.user

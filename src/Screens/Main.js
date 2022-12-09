@@ -4,8 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Slider from '../components/carrousel/Slider'
 
 
-export default function Home() {
-    
+export default function Home(navigation) {
+
+
+
     const Tab = createBottomTabNavigator();
     const onPressLearnMore = console.log('todo ok')
     const image = {
@@ -22,8 +24,8 @@ export default function Home() {
                         </Text>
                 <View >
                     <View style={styles.fixToText}>
-                    <Button title='Find your next destiny' onPress={onPressLearnMore} />
-                    <Button  title='Find the best hotels' onPress={onPressLearnMore}/>
+                    <Button title='Find your next destiny' onPress={() => navigation.navigate('Hotels')}  />
+                    <Button  title='Find the best hotels' onPress={() => navigation.navigate('SignUp')} />
                     </View>
                 </View>
                 </ImageBackground>
