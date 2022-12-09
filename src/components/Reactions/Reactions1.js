@@ -68,7 +68,7 @@ export default function Reactions1(props) {
 
 const styles=StyleSheet.create({
   quantity:{
-    fontWeight: "bold",
+    fontWeight: "bold", 
   },
   containerGeneral:{
     flexDirection:'row',

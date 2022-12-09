@@ -20,6 +20,7 @@ export default function MyReactions(props) {
               </View>
           </View>  
       </View>
+      
     {/* <div className='my-reaction-card-container'>
     <div className={color} >
        
