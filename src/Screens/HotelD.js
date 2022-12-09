@@ -1,53 +1,49 @@
-import { View, Text,StyleSheet,Dimensions,ImageBackground } from 'react-native'
+import { View, Text,StyleSheet,Dimensions,ImageBackground, Image, Pressable } from 'react-native'
 import React, { useEffect, useState } from "react";
 import { ScrollView } from 'react-native-gesture-handler'
 import axios from 'axios';
 import {BASE_URL} from '../api/url'
-import { useDispatch,useSelector } from 'react-redux';
-import reactionsActions from '../redux/actions/reactionsActions';
+import { NavigationContainer } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+
 
 
 const { height, width } = Dimensions.get("window");
 
 const image = {
-  uri: "https://images.pexels.com/photos/2404370/pexels-photo-2404370.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  uri: "https://images.pexels.com/photos/3225529/pexels-photo-3225529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 };
 
-export default function City({route}) {
+export default function HotelDetail({route}) {
+  
+  function ScreenToNavigateFrom() {
+  const navigation = useNavigation();
 
-  const {HotelId}=route.params
-
+  const {hotelId}=route.params
   let [filter,setFilter]=useState([])
-  let [shows,setShows]=useState([])
-
-  let user=[]
+  let a = productID
+  console.log(a)
 
   useEffect(()=>{
-    axios.get(`${BASE_URL}/hotels`)
-    .then(response=>setFilter(response.data.allcities.find((x) => x._id === cityId)))
+      axios.get(`${BASE_URL}/hotels`)
+      .then(response=>setFilter(response.data.allhotels.find((x) => x._id === hotelId)))
   },[])
 
-  let {name,capacity,photo,userId}=filter
+  const {name,photo,capacity} = route.params
+  
 
-  useEffect (()=>{
-    axios.get(`${BASE_URL}/hotels`)
-    .then(response=>setShows(response.data.hotels))
-  },[])
+ 
+  console.log(44,show)
+  user.push( 55, userId)
+  console.log(66, photo)
 
-  let show=shows.filter(e=>e.HotelId==HotelId)
-  user.push(userId)
+  
 
   /* ----------------------------------------------------------------------------------------------------------------- */
 
   
 
-    const image = {
-        uri: "https://images.pexels.com/photos/3225529/pexels-photo-3225529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      };
-      
-    const imageH = {
-      uri: "https://media.timeout.com/images/105544308/750/422/image.jpg",
-    };
+
 
     return ( 
 
@@ -58,17 +54,14 @@ export default function City({route}) {
                     
                         <View style={{ backgroundColor: 'grey', opacity: 0.9, left:42, width:360 , flex:1 ,}}>
 
-                            <ScrollView  style={{ flex: 8, justifyContent: 'space-evenly', alignItems: 'center', backgroundColor:'red'    }}>
-
-                                <Image style={styles.tinyLogo} source={imageH}/>
-                                <Text style={ styles.head.text2}> Nombre de hotel</Text>
-                                <Text style={ styles.head.text2}> Capacidad </Text>
+                            <ScrollView  style={{ flex: 1, backgroundColor:'red'    }}>
+                            <detailsHotels name={name} capacity={capacity} photo={photo[0]} navigation={navigation} />
                    
                             </ScrollView >
 
                             <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginVertical:15, }}>
                             <Pressable style={styles.buttono}  >
-                                <Text style={ styles.texto} onPress={(Redit)}>Back to hotels</Text>
+                                <Text style={ styles.texto} >Back to hotels</Text>
                             </Pressable>
                             </View>
                     
@@ -177,4 +170,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#000000c0",
         textTransform: "uppercase",
       },
-  });
+      span:{
+        fontWeight:'bold',
+      },
+  })  };

@@ -11,6 +11,7 @@ import {
   import CardHotel from "../components/CardHotel"
   import hotelActions from '../redux/actions/hotelActions'
   import { useDispatch,useSelector } from 'react-redux';
+  import { useNavigation } from '@react-navigation/native';
 
   
   const { height, width } = Dimensions.get("window");
@@ -35,8 +36,7 @@ import {
 let listen= (value)=> {
   setSearch(value)
 }
-
-
+console.log(search)
 async function get(){
 
   try {
@@ -56,6 +56,7 @@ async function get(){
 useEffect(()=>{
   get()
 },[search])
+
 
     return (<>
     <View>

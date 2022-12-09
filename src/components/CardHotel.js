@@ -7,12 +7,16 @@ export default function Cards({name,photo,id,navigation}) {
     const image = {
         uri: photo,
       };
+      console.log (11,name)
+      console.log (22, photo)
+      console.log (33,id)
+      console.log (44,navigation)
   return (
     <Card elevation={5} style={styles.card}>
         <Text style={styles.title}>{name}</Text>
         <Card.Cover style={styles.imageStore} key={'name'} source={image}/>
         {/* <Button onPress={()=>navigation.navigate("City",{cityId: id})} title='Read more' style={styles.button}/> */}
-        <Pressable style={styles.buttonCustom} onPress={()=>navigation.navigate("HotelD",{hotelId: id})}>
+        <Pressable style={styles.buttonCustom} onPress={()=>navigation.navigate("HotelD",{id})}>
             <Text style={styles.textButton}>Read More</Text>
         </Pressable>
     </Card>
