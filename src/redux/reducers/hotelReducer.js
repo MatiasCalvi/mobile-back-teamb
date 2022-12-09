@@ -14,7 +14,7 @@ const initialState = {
 const hotelsReducers = createReducer(initialState, (builder) => {
     builder
       .addCase( getHotels.fulfilled, (state, action) => {
-        console.log(action.payload)
+        
         return {
           ...state,
           hotels: action.payload,
@@ -34,7 +34,7 @@ const hotelsReducers = createReducer(initialState, (builder) => {
         }
        })
        .addCase(getHotelUser.fulfilled,(state,action)=>{
-        console.log(action.payload)     
+            
         return {
                 ...state,
                 hotelAdmin: action.payload.hotels
@@ -47,7 +47,7 @@ const hotelsReducers = createReducer(initialState, (builder) => {
         }
         })
     .addCase(getAndEdit.fulfilled,(state,action)=>{
-        console.log(action.payload.success)
+       
         if (action.payload.success) {
             return {
                     ...state,

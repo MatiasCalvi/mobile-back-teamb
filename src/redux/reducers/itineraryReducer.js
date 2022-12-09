@@ -13,28 +13,28 @@ const itineraryReducer = createReducer(initialState,
         builder
 
         .addCase(getItinerariesAll.fulfilled,(state,action)=>{
-            console.log(action.payload)
+            
             return {
                 ...state,
                 itinariesAdmin: action.payload.itinerary
             }  
         })
         .addCase(getItinerariesUser.fulfilled,(state,action)=>{
-            console.log(action.payload)     
+               
            return {
                     ...state,
                     itinariesAdmin: action.payload.itinerary
                 }
         })
         .addCase(getAndDestroy.fulfilled,(state,action)=>{
-            console.log(action.payload)
+            
             return {
                 ...state,
                 itineraryId : action.payload.data
             }
         })
         .addCase(getAndEdit.fulfilled,(state,action)=>{
-            console.log(action.payload.success)
+           
            if (action.payload.success) {
                 return {
                         ...state,

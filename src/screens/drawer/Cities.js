@@ -27,7 +27,8 @@ export default function Cities({navigation}) {
   
   const dispatch= useDispatch()
   let {getCitiesFilter,getCities}=toDoActions
-
+  let { logged, role ,id,token } = useSelector(store => store.usuario)
+  
 
   const {cities} = useSelector((state) => state.cities);
 
@@ -36,8 +37,7 @@ let listen=(value)=> {
 }
 
 async function get(){
-  /* console.log(search)
-  await dispatch(getCitiesFilter(search)) */
+  
   try {
     if( typeof getCities== 'function' && aproved){
 
@@ -67,7 +67,7 @@ useEffect(()=>{
       </View>
         <View>
           <SearchBar
-            /* updateSearch={updateSearch} */
+          
             onChangeText={listen}
           />
         </View>

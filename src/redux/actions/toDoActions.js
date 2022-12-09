@@ -23,7 +23,7 @@ const getCities = createAsyncThunk("getCities", async () => {
         `${BASE_URL}/cities?name=${search}`
       );
   
-      console.log(res.data.allcities);
+      
       return {
         value1: search,
         cities: res.data.allcities 

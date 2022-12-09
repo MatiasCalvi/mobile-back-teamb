@@ -4,10 +4,11 @@ import Reactions2 from '../Reactions/Reactions2'
 
 const { height, width } = Dimensions.get("window");
 
-export default function SectionDetailsDos({itinerary}) {
+export default function SectionDetailsDos({itinerary,array}) {
 
   let {description,name,photo,duration,price}=itinerary
   
+
   const image = {
     uri: photo[0],
   };
@@ -23,7 +24,7 @@ export default function SectionDetailsDos({itinerary}) {
                     <Text style={styles.duration}>Duration: {duration} hrs</Text>
                 </View>
                 <View style={styles.containerReaction}>
-                    <Reactions2/>
+                    <Reactions2 array={array}/>
                 </View>
             </View>
       

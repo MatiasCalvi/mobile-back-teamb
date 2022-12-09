@@ -6,7 +6,7 @@ import { BASE_URL } from "../../api/url";
 const getHotels = createAsyncThunk("getHotels", async () => {
     try {
       const res = await axios.get(`${BASE_URL}/hotels`);
-      console.log(res)
+      
       return res.data.allhotels;
     } catch (error) {
       console.log(error);
@@ -19,7 +19,7 @@ const getHotels = createAsyncThunk("getHotels", async () => {
       let url = `${BASE_URL}${hotels}?order=${order}&name=${searched}`;
       try {
         const res = await axios.get(url);
-        console.log(res)
+        
         return {
           hotels: res.data.allhotels,
           valueSearch: searched,

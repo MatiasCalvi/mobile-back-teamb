@@ -25,7 +25,7 @@ const toDoReducer = createReducer(initialState,
                 }
         })
         .addCase(getCitiesFilter.fulfilled,(state,action)=>{
-            console.log(action.payload)
+            
             
                 return {
                     ...state,

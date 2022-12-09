@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { createReducer } from "@reduxjs/toolkit";
 import userActions from "../actions/userActions";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { enter, enterAgain, exit, getOneUser,  editUser } = userActions;
 const initialState = {
@@ -17,15 +19,14 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(enter.fulfilled, (state, action) => {
      
       const { success, response } = action.payload;
-      console.log(action.payload);
+      
 
       if (success) {
         let { user, token } = response; 
-        localStorage.setItem(
-          "token",
-          JSON.stringify({ token: { user: token } })
-        ); 
 
+        AsyncStorage.setItem('token',JSON.stringify({ token: { user: token } }))
+                    .catch(err=>console.log(err))
+      
         let newState = {
           ...state,
           name: user.name,
@@ -47,7 +48,7 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(enterAgain.fulfilled, (state, action) => {
      
       const { success, response } = action.payload;
-      console.log(action.payload);
+     
       if (success) {
         let { user, token } = response;
 
@@ -71,7 +72,7 @@ const userReducer = createReducer(initialState, (builder) => {
 
     })
     .addCase(getOneUser.fulfilled,(state,action)=>{
-      console.log(action.payload);
+      
       return{
           ...state,
       profile: action.payload.user
@@ -86,7 +87,8 @@ const userReducer = createReducer(initialState, (builder) => {
     .addCase(exit.fulfilled, (state, action) => {
       const { success, response } = action.payload;
       if (success) {
-        localStorage.removeItem("token");
+        /* localStorage.removeItem("token"); */
+        AsyncStorage.removeItem('token')
         let newState = {
           ...state,
           name: "",

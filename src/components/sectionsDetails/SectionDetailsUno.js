@@ -1,5 +1,7 @@
 import { View, Text, Image, ImageBackground,StyleSheet,Dimensions } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
+
+
 
 const { height, width } = Dimensions.get("window");
 
@@ -9,6 +11,7 @@ export default function SectionDetailsUno({photo,name,population,continent}) {
     uri: photo,
   };
   
+ 
   return (
        
             <View style={styles.content}>

@@ -9,7 +9,7 @@ import { BASE_URL } from "../../api/url";
           `${BASE_URL}/itineraries`
         );
     
-        console.log(res.data.itinerary);
+        
         return { itinerary: res.data.itinerary };
       } catch (error) {
         console.log(error);
@@ -26,10 +26,10 @@ import { BASE_URL } from "../../api/url";
         `${BASE_URL}/itineraries?userId=${userId}`
       );
 
-      console.log(res.data.itinerary);
+      
       return { itinerary: res.data.itinerary };
     } catch (error) {
-      console.log(error);
+      
       return {
         payload: "Error",
       };
@@ -69,7 +69,7 @@ import { BASE_URL } from "../../api/url";
 
     try {
       let res = await axios.put(url,data.itinerary,headers)
-      console.log(res)
+      
       if (res.data.success){
         return {
           success: true,
@@ -97,7 +97,7 @@ import { BASE_URL } from "../../api/url";
       try {
       
         let res = await axios.post(url,data,headers)
-        console.log(res)
+        
         if(res.data.success){
             
             return {success:true, response:data}

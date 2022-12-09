@@ -8,6 +8,10 @@ import reactionsActions from '../redux/actions/reactionsActions';
 import SectionDetailsUno from '../components/sectionsDetails/SectionDetailsUno'
 import SectionDetailsDos from '../components/sectionsDetails/SectionDetailsDos'
 import SectionDetailsTres from '../components/sectionsDetails/SectionDetailsTres'
+import {DevSettings} from 'react-native'
+
+
+
 
 const { height, width } = Dimensions.get("window");
 
@@ -16,6 +20,7 @@ const image = {
 };
 
 export default function City({route}) {
+  
 
   const {cityId}=route.params
 
@@ -27,9 +32,10 @@ export default function City({route}) {
   useEffect(()=>{
     axios.get(`${BASE_URL}/cities`)
     .then(response=>setFilter(response.data.allcities.find((x) => x._id === cityId)))
-  },[])
+  },[filter])
 
   let {name,continent,photo,population,userId}=filter
+ 
 
   useEffect (()=>{
     axios.get(`${BASE_URL}/itineraries`)
@@ -41,35 +47,36 @@ export default function City({route}) {
 
   /* ----------------------------------------------------------------------------------------------------------------- */
 
-  let dispatch=useDispatch()
+   let dispatch=useDispatch()
 
     let {getReactionItinerary,getReactionItinerary2}=reactionsActions
 
     const {reactionsItinerary,reactionsItineray2} = useSelector((state) => state.newReaction);
-    console.log(reactionsItinerary)
-    
-    let{token,logged}=useSelector(state=>state.usuario)
+
+    let{token}=useSelector(state=>state.usuario)
     
 
     let idItinerary=show[0]?._id;
     let idItinerary2=show[1]?._id;
 
-    console.log(idItinerary)
+    
     async function get(){
-        await dispatch(getReactionItinerary({idItinerary,token}))
+      await dispatch(getReactionItinerary({idItinerary,token}))
     }
     async function get2(){
-        await dispatch(getReactionItinerary2({idItinerary2,token}))
+      await dispatch(getReactionItinerary2({idItinerary2,token}))
     }
-
+    
     useEffect(()=>{
         get()
     },[idItinerary])
 
     useEffect(()=>{
         get2()
-    },[idItinerary2])
+    },[idItinerary2]) 
 
+    
+    
   return (<>
     <ScrollView style={styles.body}>
       <View style={styles.header}>
@@ -84,11 +91,11 @@ export default function City({route}) {
           ?<Text style={styles.titleItineraries}>Itineraries</Text>
           :<></>}
       <View style={styles.containerItineraries}>
-      {(show.length!=0)
-          ?<SectionDetailsDos itinerary={show[0]}/>
+      {(show.length!=0) 
+          ?<SectionDetailsDos itinerary={show[0]} array={reactionsItinerary} />
           :<></>}
       {(show.length!=0)
-          ?<SectionDetailsTres itinerary={show[1]} />
+          ?<SectionDetailsTres itinerary={show[1]} array={reactionsItineray2} />
           :<></>}
       </View>
     </ScrollView>

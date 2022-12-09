@@ -7,7 +7,7 @@ import { BASE_URL } from "../../api/url";
         try {
             let user = await axios.post(url,datos)
            
-         console.log(user)
+         
          if(user.data.response.user.id){
     
              return {

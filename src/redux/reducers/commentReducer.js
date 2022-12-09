@@ -11,7 +11,7 @@ import commentAction from "../actions/commentActions";
     const commentReducer = createReducer(initialState,(builder)=>{
             builder
             .addCase(getComments.fulfilled,(state,action)=>{
-                console.log(action.payload);
+                
                 
                 return{
                     ...state,
@@ -20,7 +20,7 @@ import commentAction from "../actions/commentActions";
             })
             .addCase(addComments.fulfilled,(state,action) =>{
                 if(action.payload.success){
-                    console.log(action.payload.success)
+                    
                     state.comments.push(action.payload.response)
                 }
             })
